@@ -1,7 +1,38 @@
 import React, { Component } from 'react';
 import {Button} from 'mdbreact'
 
-class App extends Component {
+const ShowImage = (props) =>{
+    console.log ('showImage');
+
+    return ( 
+           <img src = {props.imgUrl}
+                alt = {props.imgName}
+                onClick= {props.imageViewer} />
+    )
+};
+
+
+class ImageList extends Component {
+
+    images = [
+        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+         imgName: 'Kiwi'
+        },
+        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+         imgName: 'Kiwi2'
+        },
+        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+         imgName: 'Kiwi3'
+        },
+    ];
+
+
+    showLargeImage = () => {
+        console.log ('showLargeImage');
+        return <div> LARGE IMAGE </div>
+    }
+
+
     render() {
       return (
         <div>
@@ -9,7 +40,8 @@ class App extends Component {
             <h1> Image List </h1>
             <div className = 'row'>
                 <div className = 'col'>
-                    <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w" alt="Kiwi"/>
+                  <ShowImage  image = {this.images[0]} imageViewer = {this.showLargeImage} />
+
                 </div>
                 <div className = 'col'>
                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w" alt="Kiwi2"/>
@@ -35,12 +67,12 @@ class App extends Component {
                 </div>
             </div>
         </div>
-    <div class = "container">
-        <div class="row">
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-        </div>        
+        <div className = "container">
+            <div className="row">
+                <div className="col-md-4">.col-md-4</div>
+                <div className="col-md-4">.col-md-4</div>
+                <div className="col-md-4">.col-md-4</div>
+            </div>        
         </div>
     </div>
        
@@ -49,5 +81,5 @@ class App extends Component {
     }
   }
   
-  export default App;
+  export default ImageList;
 //
