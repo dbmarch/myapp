@@ -3,18 +3,22 @@ import {Button} from 'mdbreact'
 import ImageItem from './ImageItem';
 
 class ImageList extends Component {
-    
-    images = [
-        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
-         imgName: 'Kiwi'
-        },
-        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
-         imgName: 'Kiwi2'
-        },
-        {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
-         imgName: 'Kiwi3'
-        },
-    ];
+    constructor (props) {
+        super(props)
+        this.state = {
+            images:  [
+            {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+             imgName: 'Kiwi'
+            },
+            {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+             imgName: 'Kiwi2'
+            },
+            {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+             imgName: 'Kiwi3'
+            },
+        ]
+        };
+    }
 
     imageClicked = (event,id) => {
         console.log("CLICK:  ID=%d", id);
