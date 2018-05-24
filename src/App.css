@@ -18,3 +18,11 @@
   font-size: large;
 }
 
+.ImageLarge {
+  border: 3px solid black;
+
+}
+
+.ImageThumb {
+  border: 1px solid red;
+}

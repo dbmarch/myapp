@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import {Button} from 'mdbreact'
-
-const ShowImage = (props) =>{
-    console.log ('showImage');
-
-    return ( 
-           <img src = {props.imgUrl}
-                alt = {props.imgName}
-                onClick= {props.imageViewer} />
-    )
-};
-
+import ImageItem from './ImageItem';
 
 class ImageList extends Component {
-
+    
     images = [
         {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
          imgName: 'Kiwi'
@@ -26,13 +16,11 @@ class ImageList extends Component {
         },
     ];
 
-
-    showLargeImage = () => {
-        console.log ('showLargeImage');
-        return <div> LARGE IMAGE </div>
+    imageClicked = (event,id) => {
+        console.log("CLICK:  ID=%d", id);
+        
     }
-
-
+    
     render() {
       return (
         <div>
@@ -40,14 +28,13 @@ class ImageList extends Component {
             <h1> Image List </h1>
             <div className = 'row'>
                 <div className = 'col'>
-                  <ShowImage  image = {this.images[0]} imageViewer = {this.showLargeImage} />
-
+                  <ImageItem  image = {this.images[0]} clicked = {this.imageClicked} zoom = {1} />
                 </div>
                 <div className = 'col'>
-                    <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w" alt="Kiwi2"/>
+                   <ImageItem  image = {this.images[1]} clicked = {this.imageClicked} />
                 </div>
                 <div className = 'col'>
-                    <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w" alt="Kiwi3"/>
+                   <ImageItem  image = {this.images[2]} clicked = {this.imageClicked} />
                 </div>
             </div>
             
@@ -67,16 +54,7 @@ class ImageList extends Component {
                 </div>
             </div>
         </div>
-        <div className = "container">
-            <div className="row">
-                <div className="col-md-4">.col-md-4</div>
-                <div className="col-md-4">.col-md-4</div>
-                <div className="col-md-4">.col-md-4</div>
-            </div>        
-        </div>
     </div>
-       
-
       );
     }
   }
