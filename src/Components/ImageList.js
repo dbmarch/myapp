@@ -31,37 +31,22 @@ class ImageList extends Component {
     render() {
 
       console.log ('render');
+
+      const img = this.state.images.map( (i) => (
+            <div className = 'col'>
+               <ImageItem  image = {i} clicked = {this.imageClicked} key = {i.imgName}  />
+               <Button outline color="primary">Another Button!</Button>
+            </div>
+      ));
       
+      console.log (img);
       return (<div>
                 <div className="container">
                     <h1> Image List </h1>
                         <div className = 'row'>
-                            <div className = 'col'>
-                            <ImageItem  image = {this.state.images[0]} clicked = {this.imageClicked} key = {0} zoom = {1} />
-                            </div>
-                            <div className = 'col'>
-                            <ImageItem  image = {this.state.images[1]} clicked = {this.imageClicked} key={1}/>
-                            </div>
-                            <div className = 'col'>
-                            <ImageItem  image = {this.state.images[2]} clicked = {this.imageClicked} key={2}/>
-                            </div>
+                            {img}
                         </div> 
                     
-                        <div className = 'row'>
-                            <div className = 'col'>
-                                <p> Col 1 </p>
-                                <Button outline color="primary">Primary</Button>
-
-                            </div>
-                            <div className = 'col'>
-                                <p> Col 2 </p>
-                                <Button outline color="primary">Primary</Button>
-                            </div>
-                            <div className = 'col'>
-                                <p> Col 3 </p>
-                                <Button outline color="primary">Primary</Button>
-                            </div>
-                        </div>
                 </div>
             </div>
       );
@@ -70,3 +55,14 @@ class ImageList extends Component {
   
   export default ImageList;
 //
+
+
+//<div className = 'col'>
+//<ImageItem  image = {this.state.images[0]} clicked = {this.imageClicked} key = {0} zoom = {1} />
+//</div>
+//<div className = 'col'>
+//<ImageItem  image = {this.state.images[1]} clicked = {this.imageClicked} key={1}/>
+//</div>
+//<div className = 'col'>
+//<ImageItem  image = {this.state.images[2]} clicked = {this.imageClicked} key={2}/>
+//</div>

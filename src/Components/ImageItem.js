@@ -6,8 +6,7 @@ const ImageItem =  (props) =>{
     let classes = [];
 
     classes = "ImageThumb";
-    if (props.zoom)
-    classes = "ImageLarge";
+    classes = "thumbnail";
     return ( 
         <div className={classes}>
            <img src = {props.image.imgUrl}
