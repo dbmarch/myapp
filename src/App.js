@@ -21,6 +21,7 @@ class App extends Component {
   }
 }
 
+//https://stackoverflow.com/questions/33924150/how-to-access-canvas-context-in-react?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
 
 
