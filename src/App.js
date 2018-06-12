@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import ImageList from './Components/ImageList';
-import VideoItem from './Components/VideoItem';
+import VideoItem from './components/VideoItem';
+import ImageList from './components/ImageList';
 
 
 const VideoSource = "https://media.w3.org/2010/05/sintel/trailer.mp4";
-
+const FIREBASE_URL = 'https://imagelibrary-47a2f.firebaseio.com/image.json';
 
 class App extends Component {
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to My App</h1>
-        </header>
+        </header>s
         <ImageList />
         <VideoItem videoSource = {VideoSource}/>
       </div>

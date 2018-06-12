@@ -12,7 +12,7 @@ const ImageItem =  (props) =>{
            <img src = {props.image.imgUrl}
                 alt = {props.image.imgName}
                 onClick= {props.clicked} />
-            <Button outline color="danger" onClick={props.clicked}>  Non functional Button </Button>
+            <Button outline color="danger" onClick={props.clicked}>Save</Button>
         </div>
     )   
 };
