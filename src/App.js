@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+
 // import firebaseui from 'firebaseui';
 import './App.css';
 import VideoItem from './components/VideoItem';
@@ -19,6 +20,8 @@ var config = {
   messagingSenderId: "282133875840"
 };
 firebase.initializeApp(config);
+export const auth = firebase.auth();
+
 export var storage = firebase.storage();
 
 var storageRef = storage.ref();
