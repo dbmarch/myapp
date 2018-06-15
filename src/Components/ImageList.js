@@ -32,12 +32,12 @@ class ImageList extends Component {
 
 
     componentDidMount() {
-   //      this.downloadImage();
     }
     
 
   
     getImage = () => {
+        storage.downloadFile('cola.jpg', this.updateBlob );
 
     }
 
@@ -53,9 +53,7 @@ class ImageList extends Component {
       
     saveImage  = (id) => {
         this.setState ({selectedImage: id});
-
-        storage.downloadFile('cola.jpg', this.updateBlob );
-
+        storage.uploadFile(this.state.images[0].imgUrl)
 
     }
 
