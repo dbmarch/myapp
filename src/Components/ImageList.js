@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'mdbreact'
 import ImageItem from './ImageItem';
-import axios from '../axios-db';
-import {storage} from '../App'
-// import firebase from 'firebase';
+import {storage} from '../firebase';
 
 class ImageList extends Component {
 
@@ -22,70 +20,26 @@ class ImageList extends Component {
                 imgName: 'Kiwi3'
                 }
             ],
+            myBlob: null,
             selectedImage: null
         };
     }
+
+    updateBlob = (url) => {
+        console.log ("Received URL: ", url)
+        this.setState({myBlob: url});
+    }
+
 
     componentDidMount() {
    //      this.downloadImage();
     }
     
 
-    downloadImage =() => {
-        var storageRef = storage.ref();
-        // var gsReference = storage.refFromURL ('gs://imagelibrary-47a2f.appspot.com/cola.jpg');
-        storageRef.child('cola.jpg').getDownloadURL().then(function(url) {
-            // `url` is the download URL for 'images/stars.jpg'
-          
-            // This can be downloaded directly:
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = function(event) {
-              var blob = xhr.response;
-            };
-            xhr.open('GET', url);
-            xhr.send();
-          
-            // Or inserted into an <img> element:
-            var img = document.getElementById('myimg');
-            img.src = url;
-          }).catch(function(error) {
-            // Handle any errors
-          });        
+  
+    getImage = () => {
 
-
-        // Create a reference to the file we want to download
-        // var pathReference = storage.ref('cola.jpg');
-        // var imageRef = storageRef.child('cola.jpg');
-
-        // // Get the download URL
-        // imageRef.getDownloadURL().then(function(url) {
-        // // Insert url into an <img> tag to "download"
-        //     console.log (url);
-        // }).catch(function(error) {
-
-        // // A full list of error codes is available at
-        // // https://firebase.google.com/docs/storage/web/handle-errors
-        // switch (error.code) {
-        //     case 'storage/object_not_found':
-        //     // File doesn't exist
-        //     break;
-
-        //     case 'storage/unauthorized':
-        //     // User doesn't have permission to access the object
-        //     break;
-
-        //     case 'storage/canceled':
-        //     // User canceled the upload
-        //     break;
-
-        //     case 'storage/unknown':
-        //     // Unknown error occurred, inspect the server response
-        //     break;
-        // }
-        // });
     }
-
 
     getBase64Image = (props) => {
         var canvas = document.createElement("canvas");
@@ -100,24 +54,8 @@ class ImageList extends Component {
     saveImage  = (id) => {
         this.setState ({selectedImage: id});
 
-        console.log ( ' saving image: ', id );
-        const imgName = this.state.images[id].imgName;
-        var base64 = this.getBase64Image(document.getElementById(imgName));
-        console.log (imgName);
-        console.log (base64);
-        
-        const image = {
-            name: imgName,
-            bitmap: base64
-        };
+        storage.downloadFile('cola.jpg', this.updateBlob );
 
-        axios.post('/image.json', image)
-          .then (resp=> {
-              console.log ("Image Stored");
-          })
-          .catch(error => {
-              console.log ("image failed to store");
-          });
 
     }
 
@@ -132,20 +70,25 @@ class ImageList extends Component {
       console.log ('render');
 
       const img = this.state.images.map( (i) => (
-            <div className = 'col'>
+            <div className = 'col' key= {i.imgName}>
                <ImageItem  image = {i} clicked = {() => this.saveImage(i)} key = {i.imgName}  />
-               <Button outline color="primary">Another Button!</Button>
+               <Button outline color="primary" onClick = {this.getImage}>Another Button!</Button>
             </div>
       ));
       
-      console.log (img);
+      var img2 = null;
+      if (this.state.myBlob) {
+        img2 = <img src={this.state.myBlob} alt="myBlob" />
+      }
+
       return (<div>
                 <div className="container">
                     <h1> Image List </h1>
                         <div className = 'row'>
                             {img}
                         </div> 
-                    
+                        {img2}
+
                 </div>
             </div>
       );
@@ -165,3 +108,54 @@ class ImageList extends Component {
 //<div className = 'col'>
 //<ImageItem  image = {this.state.images[2]} clicked = {this.imageClicked} key={2}/>
 //</div>
+
+
+
+        // console.log ( ' saving image: ', id );
+        // const imgName = this.state.images[id].imgName;
+        // var base64 = this.getBase64Image(document.getElementById(imgName));
+        // console.log (imgName);
+        // console.log (base64);
+        
+        // const image = {
+        //     name: imgName,
+        //     bitmap: base64
+        // };
+
+        // axios.post('/image.json', image)
+        //   .then (resp=> {
+        //       console.log ("Image Stored");
+        //   })
+        //   .catch(error => {
+        //       console.log ("image failed to store");
+        //   });
+
+// import axios from '../axios-db';
+// import {storage} from '../App'
+// import firebase from 'firebase';
+
+// firebase.initializeApp(config);
+// export const auth = firebase.auth();
+
+// export var storage = firebase.storage();
+
+// var storageRef = storage.ref();
+// // var gsReference = storage.refFromURL ('gs://imagelibrary-47a2f.appspot.com/cola.jpg');
+// storageRef.child('cola.jpg').getDownloadURL().then(function(url) {
+//     // `url` is the download URL for 'images/stars.jpg'
+  
+//     // This can be downloaded directly:
+//     var xhr = new XMLHttpRequest();
+//     xhr.responseType = 'blob';
+//     xhr.onload = function(event) {
+//       var blob = xhr.response;
+//     };
+//     xhr.open('GET', url);
+//     xhr.send();
+  
+//     // Or inserted into an <img> element:
+//     var img = document.getElementById('myimg');
+//     img.src = url;
+//   }).catch(function(error) {
+//     // Handle any errors
+//   });        
