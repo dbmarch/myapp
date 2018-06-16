@@ -4,7 +4,7 @@ import React from 'react';
 const Searchbar = (props) => {
 
     return (
-        <input 
+        <input />
 
     );
 }

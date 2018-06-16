@@ -26,31 +26,33 @@ class ImageList extends Component {
         };
     }
 
-    updateBlob = (url) => {
+    updateBlob = (url, blob) => {
         console.log ("Received URL: ", url)
-        this.setState({myBlob: url});
+        this.setState({myBlob: blob});
     }
 
     componentDidMount() {
     }
     
+      getImage = () => {
+//        storage.downloadFile('cola.jpg', this.updateBlob );
+        //storage.downloadFile('coke.png', this.updateBlob );
 
-  
-    getImage = () => {
+
         storage.downloadFile('cola.jpg', this.updateBlob );
+        console.log (this.state.myBlob);
 
+     }
 
-    }
-
-    getBase64Image = (props) => {
-        var canvas = document.createElement("canvas");
-        canvas.width = props.img.width;
-        canvas.height = props.img.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(props.img, 0, 0);
-        var dataURL = canvas.toDataURL("image/png");
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-      }
+    // getBase64Image = (props) => {
+    //     var canvas = document.createElement("canvas");
+    //     canvas.width = props.img.width;
+    //     canvas.height = props.img.height;
+    //     var ctx = canvas.getContext("2d");
+    //     ctx.drawImage(props.img, 0, 0);
+    //     var dataURL = canvas.toDataURL("image/png");
+    //     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    //   }
       
     saveImage  = (id) => {
         this.setState ({selectedImage: id});
@@ -59,14 +61,22 @@ class ImageList extends Component {
         //var data = URL.createObjectURL(kiwi);
         //console.log (data);
         console.log (typeof kiwi);
+        console.log (kiwi);
         var myBlob = new Blob([kiwi], {type: 'image/jpeg'});
-        storage.uploadFile(myBlob);
+        console.log (myBlob)
+        //storage.uploadFile("image-2.jpg", myBlob);
+        if (this.state.myBlob) {
+            var imgSrc = Object.keys(this.state.myBlob).map(x=>this.state.myBlob[x]).join();
+            console.log (imgSrc);
+            storage.uploadFile ('image-2.jpg', imgSrc);
+        } else {
+            storage.uploadFile("image-2.jpg", kiwi);
+        }
 
     }
 
     imageClicked = (event) => {
         console.log("CLICK: ", event);
-        //event.curentTarget.style.backgroundColor = '#ccc';
         console.log (event.currentTarget);
 }
     
@@ -80,7 +90,7 @@ class ImageList extends Component {
       
       var img2 = null;
       if (this.state.myBlob) {
-        img2 = <div className="thumbnail"> <img src={this.state.myBlob} alt="myBlob" /></div>
+        img2 = <img src={this.state.myBlob} alt="myBlob" />
       }
 
       return (<div>
@@ -89,8 +99,9 @@ class ImageList extends Component {
                         <div className = 'row'>
                             {img}
                         </div> 
+                        <div className = "ImageBox">
                         {img2}
-
+                        </div>
                 </div>
             </div>
       );

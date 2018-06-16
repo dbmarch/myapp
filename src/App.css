@@ -18,17 +18,26 @@
   font-size: large;
 }
 
-.ImageLarge {
-  border: 3px solid black;
-
-}
-
 
 .ImageThumb {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
+} 
+
+.ImageBox {
+  display: flex;
+  width:40%;
+  background-color: gray;
+  border: 5px solid #ddd; /* Gray border */
+  border-radius: 15px;  /* Rounded border */
   padding: 5px; /* Some padding */
-  width: 150px; /* Set a small width */
+  margin: auto; /* Set a small width */
+  align-items: center;
+}
+
+.ImageBox img {
+  width: 100%;
+  object-fit: contain;
+  text-align: center;
+
 }
 
 /* Add a hover effect (blue shadow) */
