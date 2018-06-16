@@ -9,7 +9,7 @@ var storageRef = storage.ref();
 // }
 
 const uploadFile = ( fileName ) => {
-    var uploadTask = storageRef.child(fileName).put(fileName);
+    var uploadTask = storageRef.child('kiwi.jpg').put(fileName);
 // Register three observers:
 // 1. 'state_changed' observer, called any time the state changes
 // 2. Error observer, called on failure

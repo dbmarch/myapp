@@ -2,15 +2,23 @@ import React from 'react';
 import {Button} from 'mdbreact';
 
 const ImageItem =  (props) =>{
-    console.log ("ImageItem");
-    let classes = [];
+    // console.log ("ImageItem");
+    let classes = "thumbnail";
+    let imgSrc = props.src;
 
-    classes = "ImageThumb";
-    classes = "thumbnail";
+    if (typeof props.src === 'object') {
+        imgSrc = Object.keys(props.src).map(x=>props.src[x]).join();
+        // console.log ("IMGSRC: ", typeof imgSrc,  imgSrc);
+        }
+    // else 
+    //     console.log ("STRING");
+    
+    // console.log ("src", typeof props.src, props.src );
+
     return ( 
         <div className={classes}>
-           <img src = {props.image.imgUrl}
-                alt = {props.image.imgName}
+           <img src = {imgSrc}
+                alt = {props.name}
                 onClick= {props.clicked} />
             <Button outline color="danger" onClick={props.clicked}>Save</Button>
         </div>

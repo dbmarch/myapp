@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Button} from 'mdbreact'
 import ImageItem from './ImageItem';
 import {storage} from '../firebase';
+import kiwi from '../assets/kiwi.jpg';
 
 class ImageList extends Component {
 
@@ -10,7 +11,7 @@ class ImageList extends Component {
 
         this.state = {
             images:  [
-                {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
+                {imgUrl: {kiwi},
                 imgName: 'Kiwi'
                 },
                 {imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvk0e_JcM-SeE6FK3Cz3aOW4ZQod6Rl62a17AlsfcUyVMUd1Q6w",
@@ -30,7 +31,6 @@ class ImageList extends Component {
         this.setState({myBlob: url});
     }
 
-
     componentDidMount() {
     }
     
@@ -38,6 +38,7 @@ class ImageList extends Component {
   
     getImage = () => {
         storage.downloadFile('cola.jpg', this.updateBlob );
+
 
     }
 
@@ -53,7 +54,13 @@ class ImageList extends Component {
       
     saveImage  = (id) => {
         this.setState ({selectedImage: id});
-        storage.uploadFile(this.state.images[0].imgUrl)
+        //var img = Image();
+       
+        //var data = URL.createObjectURL(kiwi);
+        //console.log (data);
+        console.log (typeof kiwi);
+        var myBlob = new Blob([kiwi], {type: 'image/jpeg'});
+        storage.uploadFile(myBlob);
 
     }
 
@@ -64,19 +71,16 @@ class ImageList extends Component {
 }
     
     render() {
-
-      console.log ('render');
-
       const img = this.state.images.map( (i) => (
             <div className = 'col' key= {i.imgName}>
-               <ImageItem  image = {i} clicked = {() => this.saveImage(i)} key = {i.imgName}  />
+               <ImageItem src={i.imgUrl} name={i.imgName} clicked = {() => this.saveImage(i)} key = {i.imgName}  />
                <Button outline color="primary" onClick = {this.getImage}>Another Button!</Button>
             </div>
       ));
       
       var img2 = null;
       if (this.state.myBlob) {
-        img2 = <img src={this.state.myBlob} alt="myBlob" />
+        img2 = <div className="thumbnail"> <img src={this.state.myBlob} alt="myBlob" /></div>
       }
 
       return (<div>
