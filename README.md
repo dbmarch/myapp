@@ -1,13 +1,14 @@
-Plan:
-1) Create a button to do a google image search
-provide a way to add/remove from the list and name  it.
- 
-2) From the list, provide a way to send to Google Vision API.
- After it goes to the vision API, display the results.
+Goals for the App:
 
-3) Provide log in authentication for google
+1) Use firebase to save photos
+2) Provide interface to log in and access photos 
+3) ability to upload, delete, tag photos.
 
-4) Interface to an IP camera - accept video and snap pictures.
+- Status of the app
 
-5) Hook these images into the image library.
+Able to log into firebase.   Have issues with crossdomain access
+To display images locally we can just render a link.  Uploading needs us to generate the bitmap and transfer.
 
+Have some of the upload/download working but I don't like the fact that I can't list the images in firebase.  I would have to store the names in the database ( or hardcode names).
+
+I think I am going to shelve this and start over using my GCP account and compute engine.
